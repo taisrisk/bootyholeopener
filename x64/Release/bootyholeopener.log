@@ -1,3 +1,10 @@
 ﻿  main.cpp
-MSVCRT.lib(exe_main.obj) : error LNK2001: unresolved external symbol main
-C:\Users\tai2l\Documents\slaveowner\x64\Release\bootyholeopener.exe : fatal error LNK1120: 1 unresolved externals
+C:\Users\tai2l\Documents\slaveowner\bootyholeopener\hijack.h(32,21): error C2664: 'int lstrcmpiA(LPCSTR,LPCSTR)': cannot convert argument 1 from 'WCHAR [260]' to 'LPCSTR'
+  (compiling source file 'main.cpp')
+      C:\Users\tai2l\Documents\slaveowner\bootyholeopener\hijack.h(32,40):
+      Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or parenthesized function-style cast
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winbase.h(2801,1):
+      see declaration of 'lstrcmpiA'
+      C:\Users\tai2l\Documents\slaveowner\bootyholeopener\hijack.h(32,21):
+      while trying to match the argument list '(WCHAR [260], LPCSTR)'
+  

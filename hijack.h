@@ -24,17 +24,19 @@ OBJECT_ATTRIBUTES InitObjectAttributes(PUNICODE_STRING name, ULONG attributes, H
 DWORD GetPID(LPCSTR procName) {
     HANDLE hSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
     if (hSnap && hSnap != INVALID_HANDLE_VALUE) {
-        PROCESSENTRY32 procEntry;
-        procEntry.dwSize = sizeof(PROCESSENTRY32);
+        PROCESSENTRY32W procEntry;
+        procEntry.dwSize = sizeof(PROCESSENTRY32W);
 
-        if (Process32First(hSnap, &procEntry)) {
+        if (Process32FirstW(hSnap, &procEntry)) {
             do {
-                if (lstrcmpiA(procEntry.szExeFile, procName) == 0) {
+                char narrowName[MAX_PATH] = {};
+                WideCharToMultiByte(CP_ACP, 0, procEntry.szExeFile, -1, narrowName, MAX_PATH, NULL, NULL);
+                if (lstrcmpiA(narrowName, procName) == 0) {
                     DWORD pid = procEntry.th32ProcessID;
                     CloseHandle(hSnap);
                     return pid;
                 }
-            } while (Process32Next(hSnap, &procEntry));
+            } while (Process32NextW(hSnap, &procEntry));
         }
         CloseHandle(hSnap);
     }
